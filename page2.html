@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width , initial-scale=1.0px">
+<head>
+<title>Game Page</title>
+</head>
+<body>
+<span class="border border-success">
+<div class="container">
+<div class="jumbotron">
+<center>
+<form>
+<font color="red"><strong><h2>Enter word : </h2></strong></font><br><br>
+<div class="col-sm-7">
+<input type="text" maxlength="5" id="word1" class="form-control" required></input></div><br><br></form>
+<button type="button" class="btn btn-primary btn-lg" onclick="myGame()">Submit It</button>
+<br><p id="show1"></p><br><br><p id="test1"></p>
+</center></div></div></span>
+<script>
+var x2=0;
+var wordc="tiger";
+function start1(x2)
+{
+	var list1=['select','earth','venus','front','tiger','click','white','party','light','limca','night','agree','right','wrong','human','jagur','snake','fiest','times','zebra'];
+	if (x2===1)
+	{
+		var x3=999;
+		//while(x3<list1.length){
+		x3 = Math.floor((Math.random() * 10 ) + 1);
+		return list1[x3];
+	}
+	else
+	{
+		return wordc;
+	}
+}
+function myGame()
+{
+	var x1 =  document.getElementById('word1').value;
+	x1 = x1.toLowerCase();
+	x2 = x2 + 1;
+	console.log(wordc);
+	if (x2!==5)
+	{
+		wordc = start1(x2);
+		var i,j,ksame=[],kns=[];
+		for (i=0;i<5;i++)
+		{
+			j=x1.search(wordc[i]);
+			if (j===i)
+			{
+				ksame.push(j);
+			}
+			else if (j!==-1)
+			{
+				kns.push(j);
+			}
+		}
+		console.log(ksame);
+		console.log(kns);
+		var f1=" ",f2=" ",ksl;
+		ksame.sort();
+		kns.sort();
+		ksl = ksame.length + kns.length ;
+		if (ksame.length!==0){
+		f1 ="Index of alphabet with right index which present in word to be guess " + ksame + "<br><br>";}
+		if (kns.length!==0){
+		f2="Index of alphabet which present in word to be guess " + kns;}
+		else if (f1.length===0){f1="<br>";}
+		else if (f2.length===0){f2="<br>";}
+		if (ksl!==5)
+		{document.getElementById('show1').innerHTML="<br><br><h2>Guess number is "+x2+"<br><br>Total no. of clues are "+ksl+"<br><br> Index = Position - 1<br><br>"+f1+f2;}
+		else
+		{
+			x2=0;
+			document.getElementById('show1').innerHTML="<br><br><h1>Congrulations you are winner</h1>";
+		}
+	}
+	else if (x2===5)
+	{
+		document.getElementById('show1').innerHTML="<br><br><h2>Answer is " + wordc +"<br> Try again</h2>";
+		x2=0;
+	}
+}
+</script>
+</body>
+</html>
